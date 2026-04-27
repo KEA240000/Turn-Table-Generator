@@ -19,9 +19,9 @@ class TurnTableWin(QtWidgets.QDialog):
     def create_shelfbttn():
         cmds.shelfButton(
     parent='CustomShelf',
-    command=my_command,
-    label='MyTool',
-    annotation='Opens My Tool',
+    command='TurnTableWin().show()',
+    label='Turntable',
+    annotation='Opens Turntable Generator',
     image='TurntableLogo.png',  
     style='iconAndTextHorizontal',
     sourceType='python')
