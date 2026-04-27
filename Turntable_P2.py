@@ -95,12 +95,15 @@ class TurnTable():
             cmds.warning("Please select your desired meshes to turn.")
             return None
     def set_lights(self):
+        #Place lights if the option is checked.
         if self.Preset_Lights == True:
             cmds.directionalLight(rotation=(45, 45, 0), intensity=0.8)
             cmds.directionalLight(rotation=(-45, -45, 0), intensity=0.8)
-    #Rotate the object every key frame based on how fast or slow the user wants
+    
     def set_keys(self):
+        #Rotate the object every key frame based on how fast or slow the user wants
         for x in objects:
             for frame in range(0, self.FPS * self.Seconds + 1):
                 cmds.setKeyframe(x, attribute='rotateY', t=frame, v=frame * self.RPS * 360 / self.FPS)
+    def export_video(self):
     #Export the video file to the desired user location.
