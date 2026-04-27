@@ -34,6 +34,12 @@ class TurnTableWin(QtWidgets.QDialog):
         self.resize(300, 200)
         self._mk_main_layout()
         self.connect_signals()
+    def mk_turntable(self):
+    #Create the turntable based on the user input.
+        self.turntable.FPS = self.fps_input.value()
+        self.turntable.Seconds = self.seconds_input.value()
+        self.turntable.RPS = self.rps_input.value()
+        self.turntable.Preset_Lights = self.preset_lights_checkbox.isChecked()
     def _mk_main_layout(self):
     #Create the main layout of the window.
         self.main_layout = QtWidgets.QVBoxLayout()
@@ -89,5 +95,8 @@ class TurnTable():
             cmds.warning("Please select your desired meshes to turn.")
             return None
     #Rotate the object every key frame based on how fast or slow the user wants
-
+    def set_keys(self):
+        for x in objects:
+            for frame in range(0, self.FPS * self.Seconds + 1):
+                cmds.setKeyframe(x, attribute='rotateY', t=frame, v=frame * self.RPS * 360 / self.FPS)
     #Export the video file to the desired user location.
