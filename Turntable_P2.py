@@ -31,7 +31,7 @@ class TurnTableWin(QtWidgets.QDialog):
         super().__init__(parent=get_maya_main_win())
         self.turntable = TurnTable()
         self.setWindowTitle("Turntable Generator")
-        self,setWindowFlags(QtCore.Qt.Tool) #stablizes it for mac users.
+        self.setWindowFlags(QtCore.Qt.Tool) #stablizes it for mac users.
         self.resize(300, 200)
         self._mk_main_layout()
         self.connect_signals()
