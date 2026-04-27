@@ -28,8 +28,18 @@ class TurnTableWin(QtWidgets.QDialog):
         self.setLayout(self.main_layout)
     def generate_turntable(self):
     #Pass the values of what is input in the GUI to the rest of the code.
+
     def connect_signals(self):
     #Connect button click signals to do as requested, like close the window.
+        self.build_btn.clicked.connect(self.generate_turntable)
+        self.cancel_btn.clicked.connect(self.close)
+
+    def mk_buttons(self):
+        #Create a generate a close button for the GUI.
+        self.build_btn = QtWidgets.QPushButton("Generate")
+        self.cancel_btn = QtWidgets.QPushButton("Cancel")
+        self.main_layout.addWidget(self.build_btn)
+        self.main_layout.addWidget(self.cancel_btn)
 
 class TurnTable():
     #Gather the FPS input and place keyframes at the desired points
