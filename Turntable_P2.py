@@ -10,10 +10,16 @@ def get_maya_main_win():
 
 #Create button for the Maya workspace with logo.
 
-class TurnTableWin():
+class TurnTableWin(QtWidgets.QDialog):
     #create code for the window to open at set size, with proper name, and widgets called.
+    
     def __init__(self):
     #put in intialization code for the window creation.
+        super().__init__(parent=get_maya_main_win())
+        self.setWindowTitle("Turntable Generator")
+        self.resize(300, 200)
+        self._mk_main_layout()
+        self.connect_signals()
     def _mk_main_layout(self):
     #Create the main layout of the window.
     def generate_turntable(self):
