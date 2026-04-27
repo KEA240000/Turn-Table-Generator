@@ -92,7 +92,7 @@ class TurnTable():
         if not objects:
             cmds.warning("Please select your desired meshes to turn.")
             return None
-    def change_pivots(self):
+    def change_pivots(self, objects):
         #Change the pivots to the center of world.
         for x in objects:
             cmds.xform(x, centerPivots=True)
