@@ -10,6 +10,7 @@ def get_maya_main_win():
 
 #Create button for the Maya workspace with logo.
 
+
 class TurnTableWin(QtWidgets.QDialog):
     #create code for the window to open at set size, with proper name, and widgets called.
     
@@ -22,6 +23,9 @@ class TurnTableWin(QtWidgets.QDialog):
         self.connect_signals()
     def _mk_main_layout(self):
     #Create the main layout of the window.
+        self.main_layout = QtWidgets.QVBoxLayout()
+
+        self.setLayout(self.main_layout)
     def generate_turntable(self):
     #Pass the values of what is input in the GUI to the rest of the code.
     def connect_signals(self):
@@ -29,7 +33,9 @@ class TurnTableWin(QtWidgets.QDialog):
 
 class TurnTable():
     #Gather the FPS input and place keyframes at the desired points
-
+    FPS = 24
+    Seconds = 5
+    RPS = .25
     #Rotate the object every key frame based on how fast or slow the user wants
 
     #Export the video file to the desired user location.
