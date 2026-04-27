@@ -94,6 +94,10 @@ class TurnTable():
         if not objects:
             cmds.warning("Please select your desired meshes to turn.")
             return None
+    def set_lights(self):
+        if self.Preset_Lights == True:
+            cmds.directionalLight(rotation=(45, 45, 0), intensity=0.8)
+            cmds.directionalLight(rotation=(-45, -45, 0), intensity=0.8)
     #Rotate the object every key frame based on how fast or slow the user wants
     def set_keys(self):
         for x in objects:
