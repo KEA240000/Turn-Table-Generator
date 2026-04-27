@@ -94,6 +94,10 @@ class TurnTable():
         if not objects:
             cmds.warning("Please select your desired meshes to turn.")
             return None
+    def change_pivots(self):
+        #Change the pivots to the center of world.
+        for x in objects:
+            cmds.xform(x, centerPivots=True)
     def set_lights(self):
         #Place lights if the option is checked.
         if self.Preset_Lights == True:
@@ -107,3 +111,4 @@ class TurnTable():
                 cmds.setKeyframe(x, attribute='rotateY', t=frame, v=frame * self.RPS * 360 / self.FPS)
     def export_video(self):
     #Export the video file to the desired user location.
+
