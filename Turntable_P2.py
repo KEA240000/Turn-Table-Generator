@@ -31,6 +31,7 @@ class TurnTableWin(QtWidgets.QDialog):
         super().__init__(parent=get_maya_main_win())
         self.turntable = TurnTable()
         self.setWindowTitle("Turntable Generator")
+        self,setWindowFlags(QtCore.Qt.Tool) #stablizes it for mac users.
         self.resize(300, 200)
         self._mk_main_layout()
         self.connect_signals()
@@ -101,7 +102,7 @@ class TurnTable():
             cmds.directionalLight(rotation=(45, 45, 0), intensity=0.8)
             cmds.directionalLight(rotation=(-45, -45, 0), intensity=0.8)
     
-    def set_keys(self):
+    def set_keys(self, objects):
         #Rotate the object every key frame based on how fast or slow the user wants
         for x in objects:
             for frame in range(0, self.FPS * self.Seconds + 1):
