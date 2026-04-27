@@ -2,6 +2,9 @@ import maya.cmds as cmds
 import maya.OpenMayaUI as omui
 from PySide6 import QtWidgets, QtCore
 from shiboken6 import wrapInstance
+from PIL import Image
+
+image = Image.open("TurntableLogo.png")
 
 def get_maya_main_win():
     """Return maya main window"""
