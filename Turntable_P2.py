@@ -46,6 +46,12 @@ class TurnTable():
     FPS = 24
     Seconds = 5
     RPS = .25
+    def get_selection(self):
+    #Select objects for the generator to turn.
+        objects = cmds.ls(selection=True)
+        if not objects:
+            cmds.warning("Please select your desired meshes to turn.")
+            return None
     #Rotate the object every key frame based on how fast or slow the user wants
 
     #Export the video file to the desired user location.
