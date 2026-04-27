@@ -13,7 +13,16 @@ def get_maya_main_win():
 
 class TurnTableWin(QtWidgets.QDialog):
     #create code for the window to open at set size, with proper name, and widgets called.
-    
+    def create_shelfbttn():
+        cmds.shelfButton(
+    parent='CustomShelf',
+    command=my_command,
+    label='MyTool',
+    annotation='Opens My Tool',
+    image='TurntableLogo.png',  
+    style='iconAndTextHorizontal',
+    sourceType='python')
+        
     def __init__(self):
     #put in intialization code for the window creation.
         super().__init__(parent=get_maya_main_win())
