@@ -25,7 +25,8 @@ class TurnTableWin(QtWidgets.QDialog):
     def _mk_main_layout(self):
     #Create the main layout of the window.
         self.main_layout = QtWidgets.QVBoxLayout()
-
+        self.turntable_options()
+        self.mk_buttons()
         self.setLayout(self.main_layout)
     def generate_turntable(self):
     #Pass the values of what is input in the GUI to the rest of the code.
