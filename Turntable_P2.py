@@ -108,5 +108,8 @@ class TurnTable():
             for frame in range(0, self.FPS * self.Seconds + 1):
                 cmds.setKeyframe(x, attribute='rotateY', t=frame, v=frame * self.RPS * 360 / self.FPS)
     def export_video(self):
-    #Export the video file to the desired user location.
-
+        #Export the video file to the desired user location.
+        cmds.playblast(format='mp4', filename='Turntable.mp4', 
+                       forceOverwrite=True, clearCache=True, viewer=False, 
+                       showOrnaments=False, offScreen=True)
+        
