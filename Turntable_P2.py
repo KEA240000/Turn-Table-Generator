@@ -27,31 +27,28 @@ class TurnTableWin(QtWidgets.QDialog):
     sourceType='python')
         
     def __init__(self):
-    #put in intialization code for the window creation.
+        #put in intialization code for the window creation.
         super().__init__(parent=get_maya_main_win())
         self.turntable = TurnTable()
         self.setWindowTitle("Turntable Generator")
         self.resize(300, 200)
         self._mk_main_layout()
         self.connect_signals()
-    def mk_turntable(self):
-    #Create the turntable based on the user input.
-        self.turntable.FPS = self.fps_input.value()
-        self.turntable.Seconds = self.seconds_input.value()
-        self.turntable.RPS = self.rps_input.value()
-        self.turntable.Preset_Lights = self.preset_lights_checkbox.isChecked()
     def _mk_main_layout(self):
-    #Create the main layout of the window.
+        #Create the main layout of the window.
         self.main_layout = QtWidgets.QVBoxLayout()
         self.turntable_options()
         self.mk_buttons()
         self.setLayout(self.main_layout)
     def generate_turntable(self):
-    #Pass the values of what is input in the GUI to the rest of the code.
-
-
+             #Create the turntable based on the user input.
+        self.turntable.FPS = self.fps_input.value()
+        self.turntable.Seconds = self.seconds_input.value()
+        self.turntable.RPS = self.rps_input.value()
+        self.turntable.Preset_Lights = self.preset_lights_checkbox.isChecked()#Pass the values of what is input in the GUI to the rest of the code.
+    
     def connect_signals(self):
-    #Connect button click signals to do as requested, like close the window.
+        #Connect button click signals to do as requested, like close the window.
         self.build_btn.clicked.connect(self.generate_turntable)
         self.cancel_btn.clicked.connect(self.close)
 
