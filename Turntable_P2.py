@@ -84,6 +84,10 @@ class TurnTable():
             print("Please select your desired meshes to turn.")
             return None
         return objects
+    def change_pivots(self, objects):
+        #Change the pivots to the center of world.
+        for x in objects:
+            cmds.xform(x, centerPivots=True)
     def set_lights(self):
         #Place lights if the option is checked.
         if self.Preset_Lights == True:
@@ -104,8 +108,8 @@ class TurnTable():
     def create_turntable(self):
         objects = self.get_selection()
         if not objects:
-            return
-        #self.change_pivots()
+            return "No objects selected."
+        self.change_pivots()
         self.set_lights()
         self.set_keys(objects)
         self.export_video()
