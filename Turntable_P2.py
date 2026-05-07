@@ -2,9 +2,7 @@ import maya.cmds as cmds
 import maya.OpenMayaUI as omui
 from PySide6 import QtWidgets, QtCore
 from shiboken6 import wrapInstance
-from PIL import Image
 
-image = Image.open("TurntableLogo.png")
 
 def get_maya_main_win():
     """Return maya main window"""
@@ -16,15 +14,7 @@ def get_maya_main_win():
 
 class TurnTableWin(QtWidgets.QDialog):
     #create code for the window to open at set size, with proper name, and widgets called.
-    def create_shelfbttn():
-        cmds.shelfButton(
-    parent='CustomShelf',
-    command='TurnTableWin().show()',
-    label='Turntable',
-    annotation='Opens Turntable Generator',
-    image='TurntableLogo.png',  
-    style='iconAndTextHorizontal',
-    sourceType='python')
+    
         
     def __init__(self):
         #put in intialization code for the window creation.
@@ -46,7 +36,8 @@ class TurnTableWin(QtWidgets.QDialog):
         self.turntable.FPS = self.fps_input.value()
         self.turntable.Seconds = self.seconds_input.value()
         self.turntable.RPS = self.rps_input.value()
-        self.turntable.Preset_Lights = self.preset_lights_checkbox.isChecked()#Pass the values of what is input in the GUI to the rest of the code.
+        self.turntable.Preset_Lights = self.preset_lights_checkbox.isChecked()
+        self.turntable.create_turntable()
     
     def connect_signals(self):
         #Connect button click signals to do as requested, like close the window.
@@ -87,19 +78,16 @@ class TurnTable():
     RPS = .25
     Preset_Lights = True
     def get_selection(self):
-    #Select objects for the generator to turn.
+        #Select objects for the generator to turn.
         objects = cmds.ls(selection=True)
         if not objects:
-            cmds.warning("Please select your desired meshes to turn.")
+            print("Please select your desired meshes to turn.")
             return None
-    def change_pivots(self, objects):
-        #Change the pivots to the center of world.
-        for x in objects:
-            cmds.xform(x, centerPivots=True)
+        return objects
     def set_lights(self):
         #Place lights if the option is checked.
         if self.Preset_Lights == True:
-            cmds.directionalLight(rotation=(45, 45, 0), intensity=0.8)
+            cmds.directionalLight(rotation=(45, 4, 0), intensity=0.8)
             cmds.directionalLight(rotation=(-45, -45, 0), intensity=0.8)
     
     def set_keys(self, objects):
@@ -112,4 +100,12 @@ class TurnTable():
         cmds.playblast(format='mp4', filename='Turntable.mp4', 
                        forceOverwrite=True, clearCache=True, viewer=False, 
                        showOrnaments=False, offScreen=True)
-        
+    
+    def create_turntable(self):
+        objects = self.get_selection()
+        if not objects:
+            return
+        #self.change_pivots()
+        self.set_lights()
+        self.set_keys(objects)
+        self.export_video()
