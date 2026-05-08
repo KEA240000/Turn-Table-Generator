@@ -100,9 +100,9 @@ class TurnTable():
     def place_camera(self):
         #Gather the direction of the turntable based on the user input.
         if self.clockwise_checkbox.isChecked():
-            cmds.camera(rotation=(0, 90, 0), position=(0, 0, 10))
+            cmds.camera(name="turntable_camera", rotation=(0, 90, 0), position=(0, 0, 10))
         else:
-            cmds.camera(rotation=(0, -90, 0), position=(0, 0, -10))
+            cmds.camera(name="turntable_camera", rotation=(0, -90, 0), position=(0, 0, -10))
     def set_keys(self, objects):
         #Rotate the object every key frame based on how fast or slow the user wants.
         total_frames = int(self.FPS * self.Seconds)
