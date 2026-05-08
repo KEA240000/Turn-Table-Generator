@@ -38,7 +38,7 @@ class TurnTableWin(QtWidgets.QDialog):
         self.turntable.Seconds = self.seconds_input.value()
         self.turntable.RPS = self.rps_input.value()
         self.turntable.Preset_Lights = self.preset_lights_checkbox.isChecked()
-        self.turntable.Clockwise = self.clockwise_checkbox.isChecked()
+        #self.turntable.Clockwise = self.clockwise_checkbox.isChecked()
         self.turntable.create_turntable()
     
     def connect_signals(self):
@@ -65,8 +65,8 @@ class TurnTableWin(QtWidgets.QDialog):
         self.rps_input = QtWidgets.QDoubleSpinBox()
         self.rps_input.setRange(0.1, 1.0)
         self.preset_lights_checkbox = QtWidgets.QCheckBox("Preset Lights")
-        self.clockwise_checkbox = QtWidgets.QCheckBox("Clockwise?")
-        self.main_layout.addWidget(self.clockwise_checkbox)
+        #self.clockwise_checkbox = QtWidgets.QCheckBox("Clockwise?")
+        #self.main_layout.addWidget(self.clockwise_checkbox)
         self.main_layout.addWidget(self.fps_label)
         self.main_layout.addWidget(self.fps_input)
         self.main_layout.addWidget(self.seconds_label)
