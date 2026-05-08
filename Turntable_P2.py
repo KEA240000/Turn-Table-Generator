@@ -64,6 +64,8 @@ class TurnTableWin(QtWidgets.QDialog):
         self.rps_input = QtWidgets.QDoubleSpinBox()
         self.rps_input.setRange(0.1, 1.0)
         self.preset_lights_checkbox = QtWidgets.QCheckBox("Preset Lights")
+        self.counterclockwise_checkbox = QtWidgets.QCheckBox("Counterclockwise")
+        self.main_layout.addWidget(self.counterclockwise_checkbox)
         self.main_layout.addWidget(self.fps_label)
         self.main_layout.addWidget(self.fps_input)
         self.main_layout.addWidget(self.seconds_label)
@@ -71,6 +73,7 @@ class TurnTableWin(QtWidgets.QDialog):
         self.main_layout.addWidget(self.rps_label)
         self.main_layout.addWidget(self.rps_input)
         self.main_layout.addWidget(self.preset_lights_checkbox)
+
 
 class TurnTable():
     #Gather the FPS input and place keyframes at the desired points
@@ -94,7 +97,10 @@ class TurnTable():
         if self.Preset_Lights == True:
             cmds.directionalLight(rotation=(45, 4, 0), intensity=0.8)
             cmds.directionalLight(rotation=(-45, -45, 0), intensity=0.8)
-    
+    def gather_direction(self):
+        #Gather the direction of the turntable based on the user input.
+        if self.counterclockwise_checkbox.isChecked():
+            self.RPS = -self.RPS
     def set_keys(self, objects):
         #Rotate the object every key frame based on how fast or slow the user wants.
         total_frames = int(self.FPS * self.Seconds)
