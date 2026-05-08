@@ -38,6 +38,7 @@ class TurnTableWin(QtWidgets.QDialog):
         self.turntable.Seconds = self.seconds_input.value()
         self.turntable.RPS = self.rps_input.value()
         self.turntable.Preset_Lights = self.preset_lights_checkbox.isChecked()
+        self.turntable.Clockwise = self.clockwise_checkbox.isChecked()
         self.turntable.create_turntable()
     
     def connect_signals(self):
@@ -81,6 +82,7 @@ class TurnTable():
     Seconds = 5
     RPS = .25
     Preset_Lights = True
+    Clockwise = False
     def get_selection(self):
         #Select objects for the generator to turn.
         objects = cmds.ls(selection=True)
@@ -97,12 +99,6 @@ class TurnTable():
         if self.Preset_Lights == True:
             cmds.directionalLight(rotation=(45, 4, 0), intensity=0.8)
             cmds.directionalLight(rotation=(-45, -45, 0), intensity=0.8)
-    def place_camera(self):
-        #Gather the direction of the turntable based on the user input.
-        if self.clockwise_checkbox.isChecked():
-            cmds.camera(name="turntable_camera", rotation=(0, 90, 0), position=(0, 0, 10))
-        else:
-            cmds.camera(name="turntable_camera", rotation=(0, -90, 0), position=(0, 0, -10))
     def set_keys(self, objects):
         #Rotate the object every key frame based on how fast or slow the user wants.
         total_frames = int(self.FPS * self.Seconds)
