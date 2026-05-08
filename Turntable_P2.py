@@ -2,7 +2,7 @@ import maya.cmds as cmds
 import maya.OpenMayaUI as omui
 from PySide6 import QtWidgets, QtCore
 from shiboken6 import wrapInstance
-import os
+
 
 
 def get_maya_main_win():
