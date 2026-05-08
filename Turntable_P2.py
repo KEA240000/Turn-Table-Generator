@@ -59,7 +59,7 @@ class TurnTableWin(QtWidgets.QDialog):
         self.fps_input.setRange(12, 36)
         self.seconds_label = QtWidgets.QLabel("Seconds:")
         self.seconds_input = QtWidgets.QSpinBox()
-        self.seconds_input.setRange(1, 30)
+        self.seconds_input.setRange(5, 30)
         self.rps_label = QtWidgets.QLabel("RPS:")
         self.rps_input = QtWidgets.QDoubleSpinBox()
         self.rps_input.setRange(0.1, 1.0)
