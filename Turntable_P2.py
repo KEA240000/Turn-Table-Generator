@@ -97,8 +97,8 @@ class TurnTable():
     def set_lights(self):
         #Place lights if the option is checked.
         if self.Preset_Lights == True:
-            cmds.directionalLight(rotation=(45, 4, 0), intensity=0.8)
-            cmds.directionalLight(rotation=(-45, -45, 0), intensity=0.8)
+            cmds.directionalLight(rotation=(135, 30, -5), intensity=2, position = (-10, -5, -10))
+            cmds.directionalLight(rotation=(-35, 25, -20), intensity=2, position = (10, 10, 10))
     def set_keys(self, objects):
         #Rotate the object every key frame based on how fast or slow the user wants.
         total_frames = int(self.FPS * self.Seconds)
