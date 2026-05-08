@@ -2,6 +2,7 @@ import maya.cmds as cmds
 import maya.OpenMayaUI as omui
 from PySide6 import QtWidgets, QtCore
 from shiboken6 import wrapInstance
+import os
 
 
 def get_maya_main_win():
@@ -95,15 +96,25 @@ class TurnTable():
             cmds.directionalLight(rotation=(-45, -45, 0), intensity=0.8)
     
     def set_keys(self, objects):
-        #Rotate the object every key frame based on how fast or slow the user wants
+        #Rotate the object every key frame based on how fast or slow the user wants.
+        total_frames = int(self.FPS * self.Seconds)
         for x in objects:
-            for frame in range(0, self.FPS * self.Seconds + 1):
-                cmds.setKeyframe(x, attribute='rotateY', t=frame, v=frame * self.RPS * 360 / self.FPS)
+            for frame in range(total_frames + 1):
+                rotation = (frame / self.FPS) * self.RPS * 360
+                cmds.setKeyframe(x, attribute='rotateY', t=frame, v=rotation)
+            cmds.keyTangent(x, attribute='rotateY', inTangentType='linear', outTangentType='linear')
+            cmds.setInfinity(x, attribute='rotateY', postInfinite='cycle')
     def export_video(self):
-        #Export the video file to the desired user location.
-        cmds.playblast(format='mp4', filename='Turntable.mp4', 
+        #Export the video file to the user's Videos folder.
+        videos_path = os.path.expanduser("~/Videos")
+        if not os.path.exists(videos_path):
+            os.makedirs(videos_path)
+        filepath = os.path.join(videos_path, 'MayaTurntable.mp4')
+        cmds.playblast(format='mp4', filename=filepath, 
                        forceOverwrite=True, clearCache=True, viewer=False, 
                        showOrnaments=False, offScreen=True)
+        print(f"Turntable exported to: {filepath}")
+        
     
     def create_turntable(self):
         objects = self.get_selection()
