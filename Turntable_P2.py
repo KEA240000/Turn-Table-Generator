@@ -104,23 +104,18 @@ class TurnTable():
                 cmds.setKeyframe(x, attribute='rotateY', t=frame, v=rotation)
             cmds.keyTangent(x, attribute='rotateY', inTangentType='linear', outTangentType='linear')
             cmds.setInfinity(x, attribute='rotateY', postInfinite='cycle')
-    def export_video(self):
-        #Export the video file to the user's Videos folder.
-        videos_path = os.path.expanduser("~/Videos")
-        if not os.path.exists(videos_path):
-            os.makedirs(videos_path)
-        filepath = os.path.join(videos_path, 'MayaTurntable.mp4')
-        cmds.playblast(format='mp4', filename=filepath, 
-                       forceOverwrite=True, clearCache=True, viewer=False, 
-                       showOrnaments=False, offScreen=True)
-        print(f"Turntable exported to: {filepath}")
+    def show_video(self):
+        #Open the play blast video window
+        cmds.playblast(viewer=True)
+
+        
         
     
     def create_turntable(self):
         objects = self.get_selection()
         if not objects:
             return "No objects selected."
-        self.change_pivots()
+        self.change_pivots(objects)
         self.set_lights()
         self.set_keys(objects)
-        self.export_video()
+        self.show_video()
