@@ -97,10 +97,12 @@ class TurnTable():
         if self.Preset_Lights == True:
             cmds.directionalLight(rotation=(45, 4, 0), intensity=0.8)
             cmds.directionalLight(rotation=(-45, -45, 0), intensity=0.8)
-    def gather_direction(self):
+    def place_camera(self):
         #Gather the direction of the turntable based on the user input.
         if self.clockwise_checkbox.isChecked():
-            self.RPS = -self.RPS
+            cmds.camera(rotation=(0, 90, 0), position=(0, 0, 10))
+        else:
+            cmds.camera(rotation=(0, -90, 0), position=(0, 0, -10))
     def set_keys(self, objects):
         #Rotate the object every key frame based on how fast or slow the user wants.
         total_frames = int(self.FPS * self.Seconds)
